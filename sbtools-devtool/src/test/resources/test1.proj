@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<project>
+    <groups>
+        <group name="Group-3" address="1/0/3"/>
+        <group name="Group-1" address="1/0/1"/>
+        <group name="Group-2" address="1/0/2"/>
+    </groups>
+    <mainGroups/>
+    <tests>
+     <test name="Write-1">
+      <writeGroupValue address="1/0/1" value="01" />
+      <readGroupValue address="1/0/1" value="01" operator="equals" />
+     </test>
+    </tests>
+</project>

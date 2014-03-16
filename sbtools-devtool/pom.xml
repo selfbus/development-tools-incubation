@@ -1,0 +1,140 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.selfbus.development-tools</groupId>
+    <artifactId>incubation-root</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>sbtools-devtool</artifactId>
+  <version>0.1-SNAPSHOT</version>
+  <name>Device Tool</name>
+  <description>A tool for developing and testing EIB devices</description>
+
+  <properties>
+    <mainClass>org.selfbus.sbtools.devtool.DevTool</mainClass>
+  </properties>
+
+  <build>
+    <plugins>
+
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.3</version>
+        <configuration>
+          <finalName>${project.build.finalName}</finalName>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>${mainClass}</mainClass>
+            </manifest>
+            <manifestEntries>
+              <Version>${project.version}</Version>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>com.google.code.maven-replacer-plugin</groupId>
+        <artifactId>replacer</artifactId>
+        <version>1.5.2</version>
+        <executions>
+          <execution>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>replace</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <ignoreMissingFile>false</ignoreMissingFile>
+          <includes>
+            <include>src/main/scripts/*</include>
+          </includes>
+          <outputDir>target</outputDir>
+          <preserveDir>false</preserveDir>
+          <replacements>
+            <replacement>
+              <token>MAIN_CLASS</token>
+              <value>${mainClass}</value>
+            </replacement>
+            <replacement>
+              <token>MAIN_JAR</token>
+              <value>${project.build.finalName}.jar</value>
+            </replacement>
+          </replacements>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.4</version>
+        <executions>
+          <execution>
+            <id>make zip</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <ignorePermissions>false</ignorePermissions>
+          <appendAssemblyId>false</appendAssemblyId>
+          <archive>
+            <manifest>
+              <mainClass>${mainClass}</mainClass>
+            </manifest>
+          </archive>
+          <descriptors>
+            <descriptor>assembly.xml</descriptor>
+          </descriptors>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.selfbus.sbtools</groupId>
+      <artifactId>sbtools-knxcom</artifactId>
+      <version>${tools-libraries.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.selfbus.sbtools</groupId>
+      <artifactId>sbtools-knxcom-gui</artifactId>
+      <version>${tools-libraries.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.selfbus.sbtools</groupId>
+      <artifactId>sbtools-common</artifactId>
+      <version>${tools-libraries.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.selfbus.sbtools</groupId>
+      <artifactId>sbtools-common-gui</artifactId>
+      <version>${tools-libraries.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jdesktop</groupId>
+      <artifactId>appframework</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+</project>

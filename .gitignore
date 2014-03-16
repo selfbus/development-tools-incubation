@@ -1,6 +1,9 @@
+target/
 *.class
-
-# Package Files #
 *.jar
 *.war
 *.ear
+pom.xml.tag
+pom.xml.next
+pom.xml.releaseBackup
+*~

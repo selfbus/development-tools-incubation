@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbars id="MainToolBars">
+ <toolbar id="File">
+  <action id="org.selfbus.sbtools.devtool.actions.ExitAction" />
+  <separator />
+  <action id="org.selfbus.sbtools.devtool.actions.NewProjectAction" />
+  <action id="org.selfbus.sbtools.devtool.actions.OpenProjectAction" />
+  <separator />
+  <action id="org.selfbus.sbtools.devtool.actions.SaveProjectAction" />
+  <action id="org.selfbus.sbtools.devtool.actions.SaveProjectAsAction" />
+ </toolbar>
+ <toolbar id="Tools">
+  <action id="org.selfbus.sbtools.devtool.actions.OpenBusTraceAction" />
+ </toolbar>
+ <toolbar id="Settings">
+  <action id="org.selfbus.sbtools.devtool.actions.SettingsAction" />
+ </toolbar>
+</toolbars>

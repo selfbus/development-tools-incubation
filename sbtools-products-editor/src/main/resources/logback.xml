@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration scan="true">
+ <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+  <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+   <pattern>%d{HH:mm:ss} [%level] %thread - %msg [%file:%line]%n</pattern>
+  </encoder>
+ </appender>
+
+ <logger name="org.selfbus.sbtools" level="debug" />
+
+ <root level="debug">
+  <appender-ref ref="STDOUT" />
+ </root>
+</configuration>

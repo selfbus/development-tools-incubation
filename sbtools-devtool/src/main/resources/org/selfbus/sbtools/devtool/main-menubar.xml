@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menubar id="MainMenu">
+ <menu id="File">
+  <action id="org.selfbus.sbtools.devtool.actions.NewProjectAction" />
+  <action id="org.selfbus.sbtools.devtool.actions.OpenProjectAction" />
+  <separator />
+  <action id="org.selfbus.sbtools.devtool.actions.SaveProjectAction" />
+  <action id="org.selfbus.sbtools.devtool.actions.SaveProjectAsAction" />
+  <separator />
+  <action id="org.selfbus.sbtools.devtool.actions.ExitAction" />
+ </menu>
+ <menu id="View" />
+ <menu id="Tools">
+  <action id="org.selfbus.sbtools.devtool.actions.OpenBusTraceAction" />
+ </menu>
+ <menu id="Settings">
+  <action id="org.selfbus.sbtools.devtool.actions.SettingsAction" />
+ </menu>
+ <menu id="Help">
+  <action id="org.selfbus.sbtools.devtool.actions.AboutAction" />
+ </menu>
+</menubar>

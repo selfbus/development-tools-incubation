@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbars id="MainToolBars">
+ <toolbar id="File">
+  <action id="org.selfbus.sbtools.prodedit.actions.ExitAction" />
+  <separator />
+  <action id="org.selfbus.sbtools.prodedit.actions.NewProjectAction" />
+  <action id="org.selfbus.sbtools.prodedit.actions.OpenProjectAction" />
+  <separator />
+  <action id="org.selfbus.sbtools.prodedit.actions.SaveProjectAction" />
+  <action id="org.selfbus.sbtools.prodedit.actions.SaveProjectAsAction" />
+  <separator />
+  <action id="org.selfbus.sbtools.prodedit.actions.ImportProjectAction" />
+  <action id="org.selfbus.sbtools.prodedit.actions.ExportProjectAction" />
+ </toolbar>
+ <toolbar id="Settings">
+  <action id="org.selfbus.sbtools.prodedit.actions.SettingsAction" />
+ </toolbar>
+</toolbars>

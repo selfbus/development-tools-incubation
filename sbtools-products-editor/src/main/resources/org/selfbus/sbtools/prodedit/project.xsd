@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+ <xs:element name="project" type="Project" />
+
+ <xs:complexType name="Project">
+  <xs:all>
+   <xs:element name="manufacturers" minOccurs="0" maxOccurs="1">
+    <xs:complexType>
+     <xs:sequence>
+      <xs:element name="manufacturer" type="Manufacturer" minOccurs="0" maxOccurs="unbounded" />
+     </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+   <xs:element name="functional_entities" minOccurs="0" maxOccurs="1">
+    <xs:complexType>
+     <xs:sequence>
+      <xs:element name="functional_entity" type="FunctionalEntity" minOccurs="0" maxOccurs="unbounded" />
+     </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+   <xs:element name="languages" minOccurs="0" maxOccurs="1">
+    <xs:complexType>
+     <xs:sequence>
+      <xs:element name="language" type="Language" minOccurs="0" maxOccurs="unbounded" />
+     </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+  </xs:all>
+  <xs:attribute name="id" type="xs:string" />
+  <xs:attribute name="name" type="xs:string" />
+  <xs:attribute name="default_lang_id" type="xs:string" />
+  <xs:attribute name="default_manufacturer_id" type="xs:int" />
+  <xs:attribute name="next_func_entity_id" type="xs:int" />
+ </xs:complexType>
+
+ <xs:complexType name="Manufacturer">
+  <xs:attribute name="id" type="xs:int" use="required" />
+  <xs:attribute name="name" type="xs:string" use="required" />
+ </xs:complexType>
+
+ <xs:complexType name="Language">
+  <xs:attribute name="id" type="xs:string" use="required" />
+  <xs:attribute name="name" type="xs:string" use="required" />
+ </xs:complexType>
+
+ <xs:complexType name="FunctionalEntity">
+  <xs:sequence>
+   <xs:element name="functional_entity" type="FunctionalEntity" minOccurs="0" maxOccurs="unbounded" />
+  </xs:sequence>
+  <xs:attribute name="id" type="xs:int" />
+  <xs:attribute name="manufacturer_id" type="xs:int" />
+  <xs:attribute name="name" type="xs:string" />
+  <xs:attribute name="number" type="xs:string" />
+  <xs:attribute name="description" type="xs:string" />
+  <xs:attribute name="help_file_name" type="xs:string" />
+  <xs:attribute name="context_id" type="xs:int" />
+ </xs:complexType>
+
+</xs:schema>

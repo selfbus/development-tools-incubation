@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<project>
+ <manufacturers>
+  <manufacturer id="76" name="Selfbus />
+ </manufacturers>
+ <functional_entities>
+  <functional_entity id="100" name="Eingabe" manufacturer_id="76">
+   <functional_entity id="110" name="Taster" manufacturer_id="76" />
+  </functional_entity>
+  <functional_entity id="200" name="Ausgabe" manufacturer_id="76">
+ </functional_entities>
+</project>
