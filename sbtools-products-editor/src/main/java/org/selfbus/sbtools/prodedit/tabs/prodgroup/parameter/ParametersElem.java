@@ -6,6 +6,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javax.swing.Box;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
@@ -51,6 +52,7 @@ public class ParametersElem extends AbstractCategoryElem implements CloseableCom
    private final ParameterPanel paramPanel = new ParameterPanel(this);
    private final CommunicationObjectPanel comObjectPanel = new CommunicationObjectPanel(this);
    private final JPanel emptyPanel = new JPanel();
+   private final JScrollPane detailsScrollPane;
    private JPanel currentPanel;
 
    /**
@@ -63,8 +65,10 @@ public class ParametersElem extends AbstractCategoryElem implements CloseableCom
       this.group = group;
 
       toolBar = new JToolBar();
-      detailsPanel = new JPanel(new BorderLayout(0, 0));
       listScrollPane = new JScrollPane(paramTree);
+
+      detailsPanel = new JPanel(new BorderLayout(0, 0));
+      detailsScrollPane = new JScrollPane(detailsPanel);
 
       selectionInTree.bindTo(paramTree);
       paramTree.setCellRenderer(paramTreeCellRenderer);
@@ -182,6 +186,15 @@ public class ParametersElem extends AbstractCategoryElem implements CloseableCom
    public String getName()
    {
       return I18n.getMessage("ParametersElem.title");
+   }
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override
+   public JComponent getDetailsPanel()
+   {
+      return detailsScrollPane;
    }
 
    /**

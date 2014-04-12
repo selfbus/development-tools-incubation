@@ -154,12 +154,12 @@ public class ParameterPanel extends JPanel implements CloseableComponent
       defaultEnumRenderer.setShowValue(true);
       defaultEnumField.setRenderer(defaultEnumRenderer);
 
-      FormLayout layout = new FormLayout("6dlu, l:p, 4dlu, f:p:g, 2dlu, l:p, 6dlu",
-         "8dlu, p, 6dlu, p, 4dlu, p, 12dlu, p, 12dlu, p, " +
-         "4dlu, p, 4dlu, p, 4dlu, p, 4dlu, p, 4dlu, p, " +
-         "12dlu, p, 4dlu, p, 4dlu, p, 4dlu, p, 4dlu, p, " +
-         "4dlu, " +
-         "f:p:g, p, 4dlu");
+      FormLayout layout = new FormLayout("6dlu, l:p, 3dlu, f:p:g, 2dlu, l:p, 6dlu",
+         "8dlu, p, 6dlu, p, 3dlu, p, 12dlu, p, 12dlu, p, " +
+         "3dlu, p, 3dlu, p, 3dlu, p, 3dlu, p, 3dlu, p, " +
+         "12dlu, p, 3dlu, p, 3dlu, p, 3dlu, p, 3dlu, p, " +
+         "3dlu, " +
+         "f:p:g, p, 3dlu");
 
       PanelBuilder builder = new PanelBuilder(layout);
       CellConstraints cc = new CellConstraints();

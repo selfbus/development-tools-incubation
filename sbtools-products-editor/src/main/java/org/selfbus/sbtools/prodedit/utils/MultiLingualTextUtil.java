@@ -49,7 +49,7 @@ public final class MultiLingualTextUtil
       MultiLingualText.Element noElem = new MultiLingualText.Element();
       for (Language lang : langs)
       {
-         layout.insertRow(row++, RowSpec.decode("4dlu"));
+         layout.insertRow(row++, RowSpec.decode("2dlu"));
          layout.insertRow(row, RowSpec.decode("p"));
 
          PropertyAdapter<MultiLingualText.Element> labelValue = new PropertyAdapter<MultiLingualText.Element>(noElem,
