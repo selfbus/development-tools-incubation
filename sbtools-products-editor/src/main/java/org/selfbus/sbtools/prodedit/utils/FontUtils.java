@@ -19,7 +19,7 @@ public final class FontUtils
       if (captionFont == null)
       {
          captionFont = UIManager.getDefaults().getFont("Label.font");
-         captionFont = captionFont.deriveFont(Font.BOLD, captionFont.getSize() * 1.25f);
+         captionFont = captionFont.deriveFont(Font.BOLD, captionFont.getSize() * 1.15f);
       }
 
       return captionFont;

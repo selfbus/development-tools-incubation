@@ -6,6 +6,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javax.swing.Box;
+import javax.swing.DropMode;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -72,6 +73,9 @@ public class ParametersElem extends AbstractCategoryElem implements CloseableCom
 
       selectionInTree.bindTo(paramTree);
       paramTree.setCellRenderer(paramTreeCellRenderer);
+      paramTree.setDragEnabled(true);
+      paramTree.setDropMode(DropMode.ON_OR_INSERT);
+      paramTree.setTransferHandler(new ParameterTransferHandler(selectionInTree));
 
       setupToolBar();
 
@@ -120,7 +124,7 @@ public class ParametersElem extends AbstractCategoryElem implements CloseableCom
    private void setupToolBar()
    {
       //  Action: add a com-object
-      toolBar.add(new BasicAction("add", I18n.getMessage("ParametersElem.addComObjectTip"), ImageCache.getIcon("icons/connect_new"))
+      toolBar.add(new BasicAction("addComObj", I18n.getMessage("ParametersElem.addComObjectTip"), ImageCache.getIcon("icons/connect_new"))
       {
          private static final long serialVersionUID = 1;
 
@@ -132,7 +136,7 @@ public class ParametersElem extends AbstractCategoryElem implements CloseableCom
       });
 
       //  Action: add a page
-      toolBar.add(new BasicAction("add", I18n.getMessage("ParametersElem.addPageTip"), ImageCache.getIcon("icons/page_new"))
+      toolBar.add(new BasicAction("addPage", I18n.getMessage("ParametersElem.addPageTip"), ImageCache.getIcon("icons/page_new"))
       {
          private static final long serialVersionUID = 1;
 
@@ -144,7 +148,7 @@ public class ParametersElem extends AbstractCategoryElem implements CloseableCom
       });
 
       //  Action: add a parameter
-      toolBar.add(new BasicAction("add", I18n.getMessage("ParametersElem.addParamTip"), ImageCache.getIcon("icons/parameter_new"))
+      toolBar.add(new BasicAction("addParam", I18n.getMessage("ParametersElem.addParamTip"), ImageCache.getIcon("icons/parameter_new"))
       {
          private static final long serialVersionUID = 1;
 

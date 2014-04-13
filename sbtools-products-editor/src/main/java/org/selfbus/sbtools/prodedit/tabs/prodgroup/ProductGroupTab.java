@@ -190,7 +190,7 @@ public class ProductGroupTab extends AbstractCloseableAccordionDetailsTab
       add(toolBar, BorderLayout.NORTH);
 
       JLabel lbl = new JLabel(I18n.getMessage("ProductGroupTab.currentDevice") + ':');
-      lbl.setFont(FontUtils.getCaptionFont());
+      lbl.setFont(FontUtils.getSubCaptionFont());
       toolBar.add(lbl);
       toolBar.add(Box.createHorizontalStrut(8));
 
