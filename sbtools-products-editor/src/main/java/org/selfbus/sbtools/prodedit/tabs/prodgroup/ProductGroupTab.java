@@ -43,6 +43,7 @@ import org.selfbus.sbtools.prodedit.tabs.internal.ObjectActivatedListener;
 import org.selfbus.sbtools.prodedit.tabs.prodgroup.general.ApplicationProgramElem;
 import org.selfbus.sbtools.prodedit.tabs.prodgroup.general.VirtualDeviceElem;
 import org.selfbus.sbtools.prodedit.tabs.prodgroup.memory.MemoryElem;
+import org.selfbus.sbtools.prodedit.tabs.prodgroup.parameditor.ParamEditorElem;
 import org.selfbus.sbtools.prodedit.tabs.prodgroup.parameter.ParametersElem;
 import org.selfbus.sbtools.prodedit.utils.FontUtils;
 import org.selfbus.sbtools.prodedit.utils.HeaderFileGenerator;
@@ -71,6 +72,7 @@ public class ProductGroupTab extends AbstractCloseableAccordionDetailsTab
    private final ParameterTypesElem parameterTypesElem;
    private final ParametersElem parametersElem;
    private final MemoryElem memoryElem;
+   private final ParamEditorElem parametersTestElem;
 
    /**
     * Create a tab panel for editing a {@link ProductGroup}.
@@ -104,6 +106,12 @@ public class ProductGroupTab extends AbstractCloseableAccordionDetailsTab
       memoryElem = new MemoryElem(group);
       addCategory(memoryElem);
 
+      MixedCategoryElem development = new MixedCategoryElem(I18n.getMessage("ProductGroupTab.developmentName"));
+      addCategory(development);
+
+      parametersTestElem = new ParamEditorElem(group);
+      development.addCategory(parametersTestElem);
+      
       ProdEdit.getInstance().getProjectService().addListener(projectListener);
 
       selectionInList.getSelectionHolder().addValueChangeListener(new PropertyChangeListener()
@@ -117,6 +125,7 @@ public class ProductGroupTab extends AbstractCloseableAccordionDetailsTab
             parameterTypesElem.setDevice(device);
             parametersElem.setDevice(device);
             memoryElem.setDevice(device);
+            parametersTestElem.setDevice(device);
          }
       });
 

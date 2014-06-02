@@ -682,7 +682,7 @@ public class ProductsImporter extends AbstractProductsExpImp
 //      AbstractParameterContainer pageParam = rootParam;
       LinkedHashMap<Integer, Parameter> appParams = new LinkedHashMap<Integer, Parameter>(4096);
 
-      for (VdParameter p : sortedParameters())
+      for (final VdParameter p : sortedParameters())
       {
          if (p.getProgramId() != vdProgramId)
             continue;
@@ -690,8 +690,8 @@ public class ProductsImporter extends AbstractProductsExpImp
          ParameterType paramType = paramTypes.get(p.getParamTypeId());
          Validate.notNull(paramType);
 
-         int offset = p.getBitOffset();
-         if (p.getAddress() != null && paramType.getSize() > 0 && paramType.getSize() < 8)
+         Integer offset = p.getBitOffset();
+         if (offset != null && p.getAddress() != null && paramType.getSize() > 0 && paramType.getSize() < 8)
             offset = 8 - offset - paramType.getSize();
 
          Parameter param = program.createParameter(paramType);

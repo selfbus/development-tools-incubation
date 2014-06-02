@@ -9,7 +9,6 @@ import javax.swing.JTree;
 import javax.swing.TransferHandler;
 import javax.swing.tree.TreePath;
 
-import org.selfbus.sbtools.common.gui.utils.TreeUtils;
 import org.selfbus.sbtools.prodedit.binding.SelectionInTree;
 import org.selfbus.sbtools.prodedit.model.prodgroup.parameter.AbstractParameterContainer;
 import org.selfbus.sbtools.prodedit.model.prodgroup.parameter.AbstractParameterNode;

@@ -8,15 +8,18 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
+import org.apache.commons.lang3.Validate;
+
 /**
  * A table model that represents a memory range. Each memory cell can have a
  * value, a name, and an area type.
  */
 public class MemoryTableModel implements TableModel
 {
-   private final int startAddr;
-   private final Vector<MemoryCell> data;
    private final Set<TableModelListener> listeners = new CopyOnWriteArraySet<TableModelListener>();
+   private final Vector<MemoryCell> data;
+   private final int startAddr;
+   private int size;
 
    /**
     * Create a memory table model.
@@ -45,7 +48,7 @@ public class MemoryTableModel implements TableModel
     */
    public int getSize()
    {
-      return data.size();
+      return size;
    }
 
    /**
@@ -55,11 +58,12 @@ public class MemoryTableModel implements TableModel
     */
    public void setSize(int newSize)
    {
-      int oldSize = data.size();
       data.setSize(newSize);
 
-      for (int i = oldSize; i < newSize; ++i)
+      for (int i = size; i < newSize; ++i)
          data.add(new MemoryCell());
+
+      this.size = newSize;
    }
 
    /**
@@ -141,6 +145,7 @@ public class MemoryTableModel implements TableModel
     */
    public MemoryCell getValueAt(int addr)
    {
+      Validate.validIndex(data, addr - startAddr, "address not in range %d..%d", startAddr, startAddr + data.size() - 1);
       MemoryCell cell = data.get(addr - startAddr);
       if (cell == null)
       {

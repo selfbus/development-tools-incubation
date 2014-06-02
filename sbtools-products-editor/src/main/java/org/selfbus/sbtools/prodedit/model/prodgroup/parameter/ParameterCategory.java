@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlType;
 import org.selfbus.sbtools.prodedit.internal.I18n;
 
 /**
- * Category of the parameter.
+ * The Category of the parameter: page, label, value.
  */
 @XmlType
 @XmlEnum

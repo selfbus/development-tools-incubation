@@ -293,6 +293,8 @@ public class MemoryElem extends AbstractCategoryElem
       ProgramAdapter adapter = ProgramAdapterFactory.getProgramAdapter(program, mask);
 
       int maxAddr = Math.max(mask.getUserRamEnd(), mask.getUserEepromEnd());
+      if (maxAddr == 0) maxAddr = 65535;
+
       tableModel.setSize((maxAddr + 15) & ~15);
 
       int start;

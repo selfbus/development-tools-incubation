@@ -133,4 +133,13 @@ public class ParameterValue extends Model
    {
       this.doubleValue = doubleValue;
    }
+
+   /**
+    * @return The value that is displayed when showing the parameter.
+    */
+   public String getDisplayedValue()
+   {
+      // TODO Auto-generated method stub
+      return null;
+   }
 }
