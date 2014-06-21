@@ -167,12 +167,20 @@ public class ProductGroupsElem implements CloseableComponent, CategoryElem
          public void actionEvent(ActionEvent event)
          {
             Project project = ProdEdit.getInstance().getProject();
-            if (project != null)
+            if (project == null) return;
+
+            Object selectedObject = selectionInList.getSelection();
+            if (selectedObject == null && !selectionInList.getList().isEmpty())
+               selectedObject = selectionInList.getList().get(0);
+
+            ProductGroup group = project.createProductGroup();
+            if (group.getManufacturer() == null && selectedObject instanceof ProductGroup)
             {
-               ProductGroup group = project.createProductGroup();
-               selectionInList.setSelection(group);
-               idField.requestFocus();
+               ProductGroup selectedGroup = (ProductGroup) selectedObject;
+               group.setManufacturer(selectedGroup.getManufacturer());
             }
+            selectionInList.setSelection(group);
+            idField.requestFocus();
          }
       });
 

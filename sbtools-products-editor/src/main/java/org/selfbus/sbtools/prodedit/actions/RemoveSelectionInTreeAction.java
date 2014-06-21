@@ -60,6 +60,8 @@ public final class RemoveSelectionInTreeAction extends BasicAction
    @Override
    public void actionEvent(ActionEvent e)
    {
+	   // TODO implement removing of selectionInTree
+
 //      List<?> list = selectionInTree.getList();
 //
 //      Object selectedObject = selectionInTree.getSelection();

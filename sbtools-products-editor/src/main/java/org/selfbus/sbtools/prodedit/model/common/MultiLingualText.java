@@ -53,6 +53,23 @@ public class MultiLingualText
    }
 
    /**
+    * Create a multi lingual text element.
+    */
+   public MultiLingualText()
+   {
+   }
+
+   /**
+    * Create a multi lingual text element with a text in the default language.
+    * 
+    * @param defaultText - the default text
+    */
+   public MultiLingualText(String defaultText)
+   {
+	   setText(ProdEdit.getInstance().getProject().getDefaultLangId(), defaultText);
+   }
+   
+   /**
     * Get the text in the default language.
     * @return The text in the default language.
     */

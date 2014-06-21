@@ -44,7 +44,7 @@ public class ApplicationProgram extends Model implements Identifiable, Symbolize
 {
    private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationProgram.class);
    private static final long serialVersionUID = 2365607976221764138L;
-
+   
    @XmlAttribute(name = "program_id", required = true)
    private int id;
 
@@ -106,7 +106,7 @@ public class ApplicationProgram extends Model implements Identifiable, Symbolize
 
    private ParameterTreeModel parameterTree;
 
-   // Next unique ID for parameters and communication objects 
+   // Next unique ID for parameters and communication objects
    private int uniqueParamId = 1;
 
    /**
@@ -184,8 +184,11 @@ public class ApplicationProgram extends Model implements Identifiable, Symbolize
    {
       Validate.notNull(paramType);
 
+      final int id = uniqueParamId++;
       Parameter param = new Parameter(paramType.getId());
-      param.setId(uniqueParamId++);
+      param.setId(id);
+      param.setName("param_" + id);
+      param.setDescription(new MultiLingualText());
 
       return param;
    }
@@ -199,8 +202,12 @@ public class ApplicationProgram extends Model implements Identifiable, Symbolize
     */
    public CommunicationObject createCommunicationObject(AbstractParameterContainer parent)
    {
+      final int id = uniqueParamId++;
       CommunicationObject comObject = new CommunicationObject();
-      comObject.setId(uniqueParamId++);
+      comObject.setId(id);
+      comObject.setName(new MultiLingualText(I18n.formatMessage("ApplicationProgram.newComObjectName", "" + id)));
+      comObject.setFunction(new MultiLingualText(I18n.formatMessage("ApplicationProgram.newComObjectFunc", "" + id)));
+      comObject.setDescription(new MultiLingualText());
 
       if (parent == null)
          parent = getParameterRoot();
@@ -609,6 +616,22 @@ public class ApplicationProgram extends Model implements Identifiable, Symbolize
    }
 
    /**
+    * @return The "empty" parameter type.
+    */
+   public ParameterType getEmptyParameterType()
+   {
+      for (ParameterType paramType : parameterTypes)
+      {
+         if (ParameterType.EMPTY_NAME.equals(paramType.getName()))
+            return paramType;
+      }
+
+      ParameterType emptyType = createParameterType(ParameterAtomicType.NONE);
+      emptyType.setName(ParameterType.EMPTY_NAME);
+      return emptyType;
+   }
+
+   /**
     * Sort the parameter types by name.
     */
    public void sortParameterTypes()
@@ -660,7 +683,7 @@ public class ApplicationProgram extends Model implements Identifiable, Symbolize
 
       DataBlock[] arr = new DataBlock[dataBlocks.size()];
       dataBlocks.toArray(arr);
-      
+
       Arrays.sort(arr, new Comparator<DataBlock>()
       {
          @Override
@@ -673,7 +696,7 @@ public class ApplicationProgram extends Model implements Identifiable, Symbolize
       dataBlocks.clear();
       Collections.addAll(dataBlocks, arr);
    }
-   
+
    /**
     * Set the program description.
     * 

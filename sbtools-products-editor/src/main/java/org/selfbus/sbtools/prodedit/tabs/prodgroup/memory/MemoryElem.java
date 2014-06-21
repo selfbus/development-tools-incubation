@@ -244,8 +244,15 @@ public class MemoryElem extends AbstractCategoryElem
    public void setDevice(VirtualDevice device)
    {
       this.device = device;
-      updateContents();
-      tableModel.unsetModified();
+      SwingUtilities.invokeLater(new Runnable()
+      {
+         @Override
+         public void run()
+         {
+            updateContents();
+            tableModel.unsetModified();
+         }
+      });
    }
 
    /**

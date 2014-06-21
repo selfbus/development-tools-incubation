@@ -34,6 +34,9 @@ public class ParameterType extends Model implements Identifiable
 {
    private static final long serialVersionUID = -6354471736343630279L;
 
+   /** The name of the "empty" parameter type that is used for parameter pages and labels. */
+   public static final String EMPTY_NAME = "NONE";
+
    @XmlAttribute(name = "id", required = true)
    private int id;
 

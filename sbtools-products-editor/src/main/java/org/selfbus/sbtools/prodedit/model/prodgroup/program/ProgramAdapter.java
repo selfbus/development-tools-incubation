@@ -22,6 +22,11 @@ public interface ProgramAdapter
    public void update();
 
    /**
+    * Initialize the program with default values from the mask.
+    */
+   public void initialize();
+
+   /**
     * @return The program
     */
    public ApplicationProgram getProgram();

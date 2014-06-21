@@ -94,7 +94,7 @@ public abstract class AbstractProgramAdapter implements ProgramAdapter
       if (commsTab == null)
          getCommsTab();
 
-      return ramFlagTabAddr;
+      return ramFlagTabAddr == null ? 0 : ramFlagTabAddr;
    }
 
    @Override
@@ -132,6 +132,9 @@ public abstract class AbstractProgramAdapter implements ProgramAdapter
       {
          commsTab = new ArrayListModel<CommsEntry>(256);
          byte[] data = getCommsTabData();
+
+         if (data == null || data.length == 0)
+            return commsTab;
 
          ramFlagTabAddr = data[1] & 255;
 

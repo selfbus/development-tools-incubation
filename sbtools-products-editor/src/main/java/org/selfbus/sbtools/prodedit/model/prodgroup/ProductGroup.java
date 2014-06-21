@@ -33,6 +33,9 @@ public class ProductGroup extends Model implements Comparable<ProductGroup>
 {
    private static final long serialVersionUID = 7542620207078765367L;
 
+   // The default mask version when creating a new application program
+   private static final int DEFAULT_MASK_VERSION = 0x11;
+
    private File file;
 
    @XmlAttribute
@@ -278,7 +281,7 @@ public class ProductGroup extends Model implements Comparable<ProductGroup>
    public ApplicationProgram createProgram(String name)
    {
       int id = IdentifiableUtils.createUniqueId(programs);
-      ApplicationProgram program = new ApplicationProgram(id, name, manufacturer.getId());
+      ApplicationProgram program = new ApplicationProgram(id, name, DEFAULT_MASK_VERSION);
       programs.add(program);
 
       return program;

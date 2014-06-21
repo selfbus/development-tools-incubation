@@ -21,7 +21,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
-import org.selfbus.sbtools.common.Config;
 import org.selfbus.sbtools.common.gui.actions.BasicAction;
 import org.selfbus.sbtools.common.gui.components.Dialogs;
 import org.selfbus.sbtools.common.gui.misc.ImageCache;
@@ -65,7 +64,8 @@ public class ProductGroupTab extends AbstractCloseableAccordionDetailsTab
    @SuppressWarnings("unchecked")
    private final JComboBox<VirtualDevice> currentDeviceCombo = BasicComponentFactory.createComboBox(selectionInList, new VirtualDeviceListCellRenderer()); 
 
-   private JButton addDeviceButton, duplicateDeviceButton, removeDeviceButton, generateHeaderFileButton;
+   private JButton addDeviceButton, removeDeviceButton, generateHeaderFileButton;
+//   private JButton duplicateDeviceButton;
 
    private final VirtualDeviceElem virtualDeviceElem;
    private final ApplicationProgramElem applicationProgramElem;
@@ -73,6 +73,7 @@ public class ProductGroupTab extends AbstractCloseableAccordionDetailsTab
    private final ParametersElem parametersElem;
    private final MemoryElem memoryElem;
    private final ParamEditorElem parametersTestElem;
+   private String lastFileName;
 
    /**
     * Create a tab panel for editing a {@link ProductGroup}.
@@ -120,6 +121,7 @@ public class ProductGroupTab extends AbstractCloseableAccordionDetailsTab
          public void propertyChange(PropertyChangeEvent e)
          {
             VirtualDevice device = selectionInList.getSelection();
+            lastFileName = null;
 
             applicationProgramElem.setDevice(device);
             parameterTypesElem.setDevice(device);
@@ -210,9 +212,9 @@ public class ProductGroupTab extends AbstractCloseableAccordionDetailsTab
       addDeviceButton.setText(null);
       toolBar.add(addDeviceButton);
 
-      duplicateDeviceButton = new JButton(duplicateDeviceAction);
-      duplicateDeviceButton.setText(null);
-      toolBar.add(duplicateDeviceButton);
+//      duplicateDeviceButton = new JButton(duplicateDeviceAction);
+//      duplicateDeviceButton.setText(null);
+//      toolBar.add(duplicateDeviceButton);
 
       removeDeviceButton = new JButton(new RemoveSelectionInListAction(selectionInList, I18n.getMessage("ProductGroupTab.removeDeviceTip"), ImageCache.getIcon("icons/editdelete")));
       removeDeviceButton.setText(null);
@@ -240,6 +242,7 @@ public class ProductGroupTab extends AbstractCloseableAccordionDetailsTab
     */
    protected void updateContents()
    {
+      lastFileName = null;
       selectionInList.setList(group.getDevices());
    }
 
@@ -273,21 +276,21 @@ public class ProductGroupTab extends AbstractCloseableAccordionDetailsTab
    /**
     * Action: duplicate a device.
     */
-   private final BasicAction duplicateDeviceAction = new BasicAction("duplicate", I18n.getMessage("ProductGroupTab.duplicateDeviceTip"), ImageCache.getIcon("icons/editcopy"))
-   {
-      private static final long serialVersionUID = 1;
-
-      @Override
-      public void actionEvent(ActionEvent event)
-      {
-         Project project = ProdEdit.getInstance().getProject();
-         if (project != null)
-         {
-            VirtualDevice device = group.createDevice();
-            selectionInList.setSelection(device);
-         }
-      }
-   };
+//   private final BasicAction duplicateDeviceAction = new BasicAction("duplicate", I18n.getMessage("ProductGroupTab.duplicateDeviceTip"), ImageCache.getIcon("icons/editcopy"))
+//   {
+//      private static final long serialVersionUID = 1;
+//
+//      @Override
+//      public void actionEvent(ActionEvent event)
+//      {
+//         Project project = ProdEdit.getInstance().getProject();
+//         if (project != null)
+//         {
+//            VirtualDevice device = group.createDevice();
+//            selectionInList.setSelection(device);
+//         }
+//      }
+//   };
 
    /**
     * Action: Generates a C/C++ header file from the virtual device.
@@ -299,12 +302,15 @@ public class ProductGroupTab extends AbstractCloseableAccordionDetailsTab
       @Override
       public void actionEvent(ActionEvent event)
       {
-         final Config cfg = Config.getInstance();
-         String last = cfg.getStringValue("generateHeaderFile.last");
+         VirtualDevice device = selectionInList.getSelection();
+         if (device == null) return;
+
+         if (lastFileName == null || lastFileName.isEmpty())
+            lastFileName = device.getName().toLowerCase().replaceAll("[^-a-zA-Z0-9]", "_").replaceAll("___*", "_") + ".h";
 
          final JFileChooser dlg = new JFileChooser();
-         dlg.setCurrentDirectory(new File(last).getParentFile());
-         dlg.setSelectedFile(new File(last));
+         dlg.setCurrentDirectory(new File(lastFileName).getParentFile());
+         dlg.setSelectedFile(new File(lastFileName));
          final FileFilter fileFilter = new HeaderFileFilter();
          dlg.addChoosableFileFilter(fileFilter);
          dlg.addChoosableFileFilter(dlg.getAcceptAllFileFilter());
@@ -317,12 +323,10 @@ public class ProductGroupTab extends AbstractCloseableAccordionDetailsTab
          File file = dlg.getSelectedFile();
          if (file == null) return;
 
-         cfg.put("generateHeaderFile.last", file.getAbsolutePath());
-
          HeaderFileGenerator generator = new HeaderFileGenerator();
          try
          {
-            generator.write(group, selectionInList.getSelection(), file);
+            generator.write(group, device, file);
             ProdEdit.getInstance().setStatusMessage(I18n.formatMessage("ProductGroupTab.generateHeaderFileDone", file.getName()));
          }
          catch (IOException e)

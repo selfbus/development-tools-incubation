@@ -228,6 +228,7 @@ public class AbstractParameterNode extends Model implements Identifiable, Ordera
    public void setParent(AbstractParameterNode parent)
    {
       this.parent = parent;
+      this.parentId = parent == null ? null : parent.getId();
    }
 
    @Override

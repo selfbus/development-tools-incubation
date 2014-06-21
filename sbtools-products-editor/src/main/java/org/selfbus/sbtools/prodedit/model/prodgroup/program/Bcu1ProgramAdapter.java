@@ -10,6 +10,8 @@ import org.selfbus.sbtools.prodedit.model.global.Mask;
  */
 public class Bcu1ProgramAdapter extends AbstractProgramAdapter
 {
+   private static final byte[] EMPTY_BYTES = new byte[0];
+
    /**
     * Create a program adapter for BCU1 style programs.
     */
@@ -39,7 +41,10 @@ public class Bcu1ProgramAdapter extends AbstractProgramAdapter
    @Override
    protected byte[] getAddressTabData()
    {
-      int addr = program.getAssocTabAddr() - 0x100;
+      int addr = program.getAssocTabAddr();
+      if (addr == 0) return EMPTY_BYTES;
+
+      addr -= 0x100;
       int sz = program.getAddrTabSize();
 
       return Arrays.copyOfRange(getEepromData(), addr, addr + sz);
@@ -48,7 +53,10 @@ public class Bcu1ProgramAdapter extends AbstractProgramAdapter
    @Override
    protected byte[] getCommsTabData()
    {
-      int addr = program.getCommsTabAddr() - 0x100;
+      int addr = program.getCommsTabAddr();
+      if (addr == 0) return EMPTY_BYTES;
+
+      addr -= 0x100;
       int sz = program.getCommsTabSize();
 
       int tabSize = getEepromData()[addr] * 3 + 2;
@@ -60,7 +68,10 @@ public class Bcu1ProgramAdapter extends AbstractProgramAdapter
    @Override
    protected byte[] getAssocTabData()
    {
-      int addr = program.getAssocTabAddr() - 0x100;
+      int addr = program.getAssocTabAddr();
+      if (addr == 0) return EMPTY_BYTES;
+
+      addr -= 0x100;
       int sz = program.getAssocTabSize();
 
       return Arrays.copyOfRange(getEepromData(), addr, addr + sz);
@@ -69,10 +80,15 @@ public class Bcu1ProgramAdapter extends AbstractProgramAdapter
    @Override
    public void apply()
    {
-      // TODO Auto-generated method stub
-      
+      // TODO Auto-generated method stub      
    }
 
+   @Override
+   public void initialize()
+   {
+      // TODO Auto-generated method stub
+   }
+   
    @Override
    protected void fixCommsEntryAddr(CommsEntry entry)
    {

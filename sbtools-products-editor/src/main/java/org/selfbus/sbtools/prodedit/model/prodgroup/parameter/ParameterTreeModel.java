@@ -2,8 +2,6 @@ package org.selfbus.sbtools.prodedit.model.prodgroup.parameter;
 
 import java.util.Enumeration;
 import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
 
 import javax.swing.event.EventListenerList;
 import javax.swing.event.TreeModelEvent;

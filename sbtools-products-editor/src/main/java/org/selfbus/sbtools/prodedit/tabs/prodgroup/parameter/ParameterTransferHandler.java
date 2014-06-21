@@ -107,6 +107,7 @@ public class ParameterTransferHandler extends TransferHandler
       model.nodesWereInserted(target, new int[] { target.getChildCount() - 1 });
       model.nodeStructureChanged(target);
 
+      selectionInTree.setSelection(null);
       selectionInTree.setSelection(node);
       tree.scrollRowToVisible(tree.getSelectionRows()[0]);
 

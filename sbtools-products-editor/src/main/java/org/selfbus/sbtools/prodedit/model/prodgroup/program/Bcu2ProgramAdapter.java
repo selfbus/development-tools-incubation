@@ -109,6 +109,11 @@ public class Bcu2ProgramAdapter extends AbstractProgramAdapter
    public void apply()
    {
       // TODO Auto-generated method stub
-      
+   }
+
+   @Override
+   public void initialize()
+   {
+      // TODO Auto-generated method stub
    }
 }

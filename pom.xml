@@ -30,14 +30,17 @@
     <connection>scm:git:git://github.com/selfbus/development-tools-incubation.git</connection>
     <developerConnection>scm:git:git@github.com:selfbus/development-tools-incubation.git</developerConnection>
   </scm>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <tools-libraries.version>0.2.1</tools-libraries.version>
+    <tools-libraries.version>0.3</tools-libraries.version>
   </properties>
+
   <modules>
     <module>sbtools-devtool</module>
     <module>sbtools-products-editor</module>
   </modules>
+
   <dependencyManagement>
     <dependencies>
       <dependency>

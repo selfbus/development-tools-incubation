@@ -99,22 +99,22 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.selfbus.sbtools</groupId>
+      <groupId>org.selfbus.tools-libraries</groupId>
       <artifactId>sbtools-knxcom</artifactId>
       <version>${tools-libraries.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.selfbus.sbtools</groupId>
+      <groupId>org.selfbus.tools-libraries</groupId>
       <artifactId>sbtools-knxcom-gui</artifactId>
       <version>${tools-libraries.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.selfbus.sbtools</groupId>
+      <groupId>org.selfbus.tools-libraries</groupId>
       <artifactId>sbtools-common</artifactId>
       <version>${tools-libraries.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.selfbus.sbtools</groupId>
+      <groupId>org.selfbus.tools-libraries</groupId>
       <artifactId>sbtools-common-gui</artifactId>
       <version>${tools-libraries.version}</version>
     </dependency>
