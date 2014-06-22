@@ -76,11 +76,19 @@
      </xs:sequence>
     </xs:complexType>
    </xs:element>
-   <xs:element name="parameterRoot" type="ParameterRoot" minOccurs="0" maxOccurs="1" />
+   <xs:element name="data_blocks" minOccurs="0" maxOccurs="1">
+    <xs:complexType>
+     <xs:sequence>
+      <xs:element name="data_block" type="DataBlock" minOccurs="0" maxOccurs="unbounded" />
+     </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+   <xs:element name="parameters" type="ParameterRoot" minOccurs="0" maxOccurs="1" />
   </xs:all>
   <xs:attribute name="program_id" type="xs:int" use="required" />
   <xs:attribute name="symbol_id" type="xs:int" />
   <xs:attribute name="mask_id" type="xs:int" />
+  <xs:attribute name="mask_version" type="xs:int" />
   <xs:attribute name="program_name" type="xs:string" use="required" />
   <xs:attribute name="program_version" type="xs:string" />
   <xs:attribute name="program_type" type="xs:int" use="required" />
@@ -139,6 +147,7 @@
   <xs:attribute name="parent_id" type="xs:integer" />
   <xs:attribute name="parent_value" type="xs:integer" />
   <xs:attribute name="number" type="xs:integer" />
+  <xs:attribute name="address" type="xs:integer" />
  </xs:complexType>
 
  <xs:complexType name="AbstractParameterContainer" abstract="true">
@@ -171,7 +180,6 @@
     <xs:attribute name="visible" type="xs:boolean" use="required" />
     <xs:attribute name="type_id" type="xs:int" use="required" />
     <xs:attribute name="size" type="xs:int" default="0" />
-    <xs:attribute name="address" type="xs:int" />
     <xs:attribute name="bit_offset" type="xs:int" />
     <xs:attribute name="default_int" type="xs:int" />
     <xs:attribute name="default_double" type="xs:double" />
@@ -195,6 +203,39 @@
     <xs:attribute name="type" type="xs:string" />
    </xs:extension>
   </xs:complexContent>
+ </xs:complexType>
+
+ <xs:complexType name="DataBlock">
+  <xs:all>
+   <xs:element name="paragraphs" minOccurs="0" maxOccurs="1">
+    <xs:complexType>
+     <xs:sequence>
+      <xs:element name="paragraph" type="DataBlockParagraph" minOccurs="0" maxOccurs="unbounded" />
+     </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+  </xs:all>
+  <xs:attribute name="id" type="xs:int" use="required" />
+  <xs:attribute name="block_number" type="xs:int" use="required" />
+  <xs:attribute name="block_name" type="xs:string" use="required" />
+  <xs:attribute name="block_type" type="xs:integer" />
+  <xs:attribute name="control_code" type="xs:integer" />
+  <xs:attribute name="segment_type" type="xs:integer" />
+  <xs:attribute name="segment_id" type="xs:integer" />
+  <xs:attribute name="segment_address" type="xs:integer" />
+  <xs:attribute name="segment_length" type="xs:integer" />
+  <xs:attribute name="access_attributes" type="xs:integer" />
+  <xs:attribute name="memory_type" type="xs:integer" />
+  <xs:attribute name="memory_attributes" type="xs:integer" />
+  <xs:attribute name="data" type="xs:hexBinary" />
+  <xs:attribute name="mask" type="xs:double" />
+ </xs:complexType>
+
+ <xs:complexType name="DataBlockParagraph">
+  <xs:attribute name="id" type="xs:int" use="required" />
+  <xs:attribute name="pt_column_id" type="xs:integer" />
+  <xs:attribute name="data_long" type="xs:integer" />
+  <xs:attribute name="data_binary" type="xs:hexBinary" />
  </xs:complexType>
 
  <xs:complexType name="Symbol">

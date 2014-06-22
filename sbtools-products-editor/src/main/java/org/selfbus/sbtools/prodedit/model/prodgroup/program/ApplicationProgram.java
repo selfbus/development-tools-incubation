@@ -433,7 +433,7 @@ public class ApplicationProgram extends Model implements Identifiable, Symbolize
    /**
     * @return The root of the parameter tree model.
     */
-   @XmlElement(name = "parameterRoot")
+   @XmlElement(name = "parameters")
    public ParameterRoot getParameterRoot()
    {
       if (parameterTree == null)

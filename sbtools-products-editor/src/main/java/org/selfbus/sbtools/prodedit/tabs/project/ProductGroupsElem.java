@@ -188,7 +188,7 @@ public class ProductGroupsElem implements CloseableComponent, CategoryElem
       //  Action: remove a product group
       //
       RemoveSelectionInListAction removeAction = new RemoveSelectionInListAction(selectionInList,
-         I18n.getMessage("LanguagesElem.removeTip"), ImageCache.getIcon("icons/editdelete"));
+         I18n.getMessage("ProductGroupsElem.removeTip"), ImageCache.getIcon("icons/editdelete"));
       removeAction.setConfirmAction(true);
       toolBar.add(removeAction);
 

@@ -229,6 +229,48 @@ public class ProductGroup extends Model implements Comparable<ProductGroup>
    }
 
    /**
+    * Find a virtual device by ID.
+    *
+    * @param id - the ID of the device to find
+    *
+    * @return The virtual device, null if not found.
+    */
+   public VirtualDevice getDeviceById(int id)
+   {
+      if (devices == null)
+         return null;
+
+      for (VirtualDevice device : devices)
+      {
+         if (device.getId() == id)
+            return device;
+      }
+
+      return null;
+   }
+
+   /**
+    * Find a virtual device by name.
+    *
+    * @param name - the name of the device to find
+    *
+    * @return The virtual device, null if not found.
+    */
+   public VirtualDevice getDeviceByName(String name)
+   {
+      if (devices == null)
+         return null;
+
+      for (VirtualDevice device : devices)
+      {
+         if (device.getName().equals(name))
+            return device;
+      }
+
+      return null;
+   }
+
+   /**
     * Create a virtual device with a new application program.
     */
    public VirtualDevice createDevice()

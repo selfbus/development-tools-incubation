@@ -917,7 +917,8 @@ public class ProductsExporter extends AbstractProductsExpImp
       if (param.getParentId() != null)
       {
          Integer parentId = paramIdMap.get(param.getParentId());
-         Validate.notNull(parentId, "No mapping found for parent parameter #" + param.getParentId() + " of parameter #" + param.getId());
+         Validate.notNull(parentId, "No mapping found for parent parameter #%d (parameter #%d of program #%d %s)",
+            param.getParentId(), param.getId(), program.getId(), program.getName());
          p.setParentId(parentId);
       }
       p.setLabel(null); // TODO null ok here?

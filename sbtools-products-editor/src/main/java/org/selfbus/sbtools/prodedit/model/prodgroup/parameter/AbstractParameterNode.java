@@ -28,7 +28,7 @@ public class AbstractParameterNode extends Model implements Identifiable, Ordera
    private static final long serialVersionUID = 8492676566007169620L;
 
    @XmlAttribute(name = "id", required = true)
-   protected int id;
+   protected Integer id;
 
    @XmlElement(name = "description")
    private MultiLingualText description;
@@ -228,7 +228,10 @@ public class AbstractParameterNode extends Model implements Identifiable, Ordera
    public void setParent(AbstractParameterNode parent)
    {
       this.parent = parent;
-      this.parentId = parent == null ? null : parent.getId();
+
+      if (parent instanceof ParameterRoot || parent == null)
+         this.parentId = null;
+      else this.parentId = parent.getId();
    }
 
    @Override
@@ -264,7 +267,7 @@ public class AbstractParameterNode extends Model implements Identifiable, Ordera
    @Override
    public int hashCode()
    {
-      return id;
+      return id == null ? -1 : id;
    }
 
    /**
